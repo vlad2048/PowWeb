@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DAA6E081-A463-4BE8-A42E-3DBBBF1E5499}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		License.txt = License.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowWeb", "Libs\PowWeb\PowWeb.csproj", "{A72EDA34-1ED5-4FBA-87EC-C14D04436C74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{DD4AF29A-FDA0-4FC3-B19F-CC9462294F2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A72EDA34-1ED5-4FBA-87EC-C14D04436C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A72EDA34-1ED5-4FBA-87EC-C14D04436C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A72EDA34-1ED5-4FBA-87EC-C14D04436C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A72EDA34-1ED5-4FBA-87EC-C14D04436C74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A72EDA34-1ED5-4FBA-87EC-C14D04436C74} = {DD4AF29A-FDA0-4FC3-B19F-CC9462294F2A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {962C20E0-4BB6-4F4D-937A-B89DDBFFBCB3}
+	EndGlobalSection
+EndGlobal
