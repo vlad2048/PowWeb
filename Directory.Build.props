@@ -10,13 +10,13 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Authors>vlad2048</Authors>
 		<Description>Puppeteer and Chrome DOMSnapshot API wrapper</Description>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags>Puppeteer, Chrome DOMSnapshot, Scraping</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageProjectUrl>https://github.com/vlad2048/PowWeb</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+		<None Include="$(SolutionDir)\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>
