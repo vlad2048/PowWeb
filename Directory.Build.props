@@ -6,14 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DebugType>embedded</DebugType>
     
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>vlad2048</Authors>
     
     <Description>Puppeteer and Chrome DOMSnapshot API wrapper</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>Reactive,Rx,C#,Variable</PackageTags>
+    <PackageTags>Puppeteer, Chrome DOMSnapshot, Scraping</PackageTags>
     <PackageProjectUrl>https://github.com/vlad2048/PowWeb</PackageProjectUrl>
 
   </PropertyGroup>
