@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net7.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -23,8 +24,8 @@
 		<PackageReference Include="IpcLib" Version="0.0.1" />
 		<PackageReference Include="Jsbeautifier" Version="0.0.1" />
 		<PackageReference Include="PowBasics.Geom" Version="0.0.6" />
-		<PackageReference Include="PowMaybe" Version="0.0.2" />
-		<PackageReference Include="PowMaybeErr" Version="0.0.2" />
+		<PackageReference Include="PowMaybe" Version="0.0.6" />
+		<PackageReference Include="PowMaybeErr" Version="0.0.6" />
 		<PackageReference Include="PowRxVar.WinForms" Version="0.0.2" />
 		<PackageReference Include="PowTrees" Version="0.0.3" />
 		<PackageReference Include="PuppeteerSharp" Version="7.1.0" />
