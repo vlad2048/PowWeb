@@ -43,6 +43,8 @@
 		<Folder Include="2_Actions\3_Screenshot\Logic\" />
 		<Folder Include="2_Actions\3_Screenshot\Utils\" />
 		<Folder Include="2_Actions\4_WhenRequest\" />
+		<Folder Include="ChromeApi\DDom\Structs\" />
+		<Folder Include="ChromeApi\DOverlay\Structs\" />
 	</ItemGroup>
 
 </Project>

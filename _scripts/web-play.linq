@@ -1,17 +1,20 @@
 <Query Kind="Program">
-  <Reference>C:\Dev_Nuget\Libs\PowWeb\Libs\PowWeb\bin\Debug\net6.0-windows\PowWeb.dll</Reference>
+  <Reference>C:\Dev_Nuget\Libs\PowWeb\Libs\PowWeb\bin\Debug\net7.0-windows\PowWeb.dll</Reference>
   <NuGetReference>PowBasics</NuGetReference>
+  <Namespace>DynamicData</Namespace>
   <Namespace>LINQPad.Controls</Namespace>
+  <Namespace>Newtonsoft.Json.Linq</Namespace>
   <Namespace>PowBasics.Geom</Namespace>
+  <Namespace>PowBasics.StringsExt</Namespace>
   <Namespace>PowTrees.Algorithms</Namespace>
   <Namespace>PowWeb</Namespace>
   <Namespace>PowWeb._1_Init._1_OptStructs.Enums</Namespace>
   <Namespace>PowWeb._1_Init._3_Logging.Loggers</Namespace>
+  <Namespace>PowWeb.ChromeApi.DDom</Namespace>
   <Namespace>PowWeb.ChromeApi.DDomSnapshot</Namespace>
+  <Namespace>PowWeb.ChromeApi.DOverlay</Namespace>
+  <Namespace>PowWeb.ChromeApi.Utils</Namespace>
   <Namespace>PuppeteerSharp</Namespace>
-  <Namespace>PowBasics.StringsExt</Namespace>
-  <Namespace>DynamicData</Namespace>
-  <Namespace>Newtonsoft.Json.Linq</Namespace>
 </Query>
 
 #load ".\libs\web-con"
@@ -21,23 +24,32 @@ public static LinqPadLogger logger = null!;
 
 void Main()
 {
-	var url = "https://novids.com/search?q=kitkat";
-	url = "https://hpjav.tv/?s=piss";
-	//url = "https://scatkings.com/categories/professional/";
-	//url = "https://scatkings.com/videos/124526/snow-white-and-the-seven-dung-dwarfs/";
-	var pt = new Pt(242, 530);
+	var url = "https://motherless.com/u/Myhumantoilet?t=v";
 
 	logger = new LinqPadLogger();
 	
 	web = Web.Get(opt =>
 	{
 		opt.OpenMode = OpenMode.ConnectOrCreate;
-		opt.DeleteProfile = true;
-		opt.AdBlockMode = AdBlockMode.Enabled;
+		opt.DeleteProfile = false;
+		opt.AdBlockMode = AdBlockMode.Disabled;
 		opt.Logger = logger;
 	});
 	
-	Util.HorizontalRun(true,
+	web.Exec(null, www =>
+	{
+		www.Goto(url);
+		var page = www.GetPage();
+		var client = page.Client;
+		
+		client.Dom_Enable();
+		client.Overlay_Enable();
+		page.SetScroll(new Pt(0, 150));
+		client.Overlay_HighlightRect(120, 70, 250, 130, new(245, 102, 66, 1.0), new(66, 245, 129, 1.0));
+		
+	});
+	
+	/*Util.HorizontalRun(true,
 		Btn("Log", Lg),
 		Btn("Go", www =>
 		{
@@ -56,14 +68,29 @@ void Main()
 		{
 			Fix(www);
 		})
-	).Dump();
+	).Dump();*/
 	
 	logger.CallDump();
 	
 	logDC = new DumpContainer().Dump();
 }
 
-Button Btn(string name, Action<WebInst> action) => new Button(name, b =>
+static class PageExt
+{
+	public static void SetScroll(this Page page, Pt pt)
+	{
+		try
+		{
+			page.EvaluateExpressionAsync($"document.documentElement.scrollLeft = {pt.X}").Wait();
+			page.EvaluateExpressionAsync($"document.documentElement.scrollTop= {pt.Y}").Wait();
+		}
+		catch (Exception)
+		{
+		}
+	}
+}
+
+/*Button Btn(string name, Action<WebInst> action) => new Button(name, b =>
 {
 	b.Styles["background-color"] = "#FEA5A0";
 	web.Exec(action);
@@ -214,4 +241,4 @@ public static class Ext
 		true => "_",
 		false => url.Truncate(32)
 	};
-}
+}*/
