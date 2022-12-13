@@ -12,7 +12,6 @@ namespace PowWeb;
 public class CapOpt
 {
 	public bool Deep { get; set; }
-	public string? LogFolder { get; set; }
 	private CapOpt()
 	{
 	}
@@ -45,7 +44,7 @@ public static class Cap_Ext
 			.CheckAssumptions()
 			.Convert()
 			.Simplify()
-			.Merge(www.CurrentUrl, opt.Deep, opt.LogFolder);
+			.Merge(www.CurrentUrl, opt.Deep);
 
 		www.SigEnd();
 		return res;

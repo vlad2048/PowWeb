@@ -88,6 +88,13 @@ static class PageExt
 		{
 		}
 	}
+	
+	public static Pt GetScroll(this Page page)
+	{
+		var x = page.EvaluateExpressionAsync("document.documentElement.scrollLeft").Result.ToObject<int>();
+		var y = page.EvaluateExpressionAsync("document.documentElement.scrollTop").Result.ToObject<int>();
+		return new Pt(x, y);
+	}
 }
 
 /*Button Btn(string name, Action<WebInst> action) => new Button(name, b =>

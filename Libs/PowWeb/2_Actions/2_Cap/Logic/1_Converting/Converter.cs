@@ -46,6 +46,7 @@ static class Converter
 	private static N Mix2CapNod(NodNfo nod, LayNfo? lay) => Nod.Make(new CapNode(
 		// Nods
 		Index:			nod.Index,
+		BackendNodeId:	nod.BackendNodeId,
 		NodeType:		(CapNodeType)nod.NodeType,
 		Name:			nod.Name,
 		Attrs:			nod.Attrs.SelectToArray(f => new CapAttr(f.Name, f.Value)),

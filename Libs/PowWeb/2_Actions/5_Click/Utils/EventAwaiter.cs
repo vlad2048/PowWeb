@@ -1,4 +1,5 @@
-﻿namespace PowWeb._2_Actions._5_Click.Utils;
+﻿/*
+namespace PowWeb._2_Actions._5_Click.Utils;
 
 class EventAwaiter
 {
@@ -16,3 +17,4 @@ class EventAwaiter
 		return isOk;
 	}
 }
+*/

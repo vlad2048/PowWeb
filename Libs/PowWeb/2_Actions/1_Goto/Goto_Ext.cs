@@ -13,6 +13,15 @@ public static class Goto_Ext
 		www.SigStart(CodeLoc.Goto);
 
 		var page = www.GetPage();
+
+		if (UrlUtils.AreUrlsTheSame(www.CurrentUrl, url))
+		{
+			if (www.CurrentUrl != url)
+				www.CurrentUrl = page.Url;
+			www.SigEnd();
+			return;
+		}
+
 		page.GoToAsync(url, WaitUntilNavigation.Networkidle2).Wait();
 		var areUrlsTheSame = UrlUtils.AreUrlsTheSame(page.Url, url);
 		if (!areUrlsTheSame) throw new FatalException($"Failed to goto url: '{url}'");

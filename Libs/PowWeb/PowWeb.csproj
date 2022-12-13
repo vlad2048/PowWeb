@@ -43,6 +43,10 @@
 		<Folder Include="2_Actions\3_Screenshot\Logic\" />
 		<Folder Include="2_Actions\3_Screenshot\Utils\" />
 		<Folder Include="2_Actions\4_WhenRequest\" />
+		<Folder Include="2_Actions\5_Click\Logic\" />
+		<Folder Include="2_Actions\5_Click\Events\" />
+		<Folder Include="2_Actions\6_Blink\" />
+		<Folder Include="2_Actions\7_Scroll\" />
 		<Folder Include="ChromeApi\DDom\Structs\" />
 		<Folder Include="ChromeApi\DOverlay\Structs\" />
 	</ItemGroup>

@@ -14,13 +14,13 @@ record HighlightConfig(
 	bool? ShowAccessibilityInfo,
 	bool? ShowExtensionLines,
 	RGBA? ContentColor,
-	RGBA? paddingColor,
-	RGBA? borderColor,
-	RGBA? marginColor,
-	RGBA? eventTargetColor,
-	RGBA? shapeColor,
-	RGBA? shapeMarginColor,
-	RGBA? cssGridColor,
+	RGBA? PaddingColor,
+	RGBA? BorderColor,
+	RGBA? MarginColor,
+	RGBA? EventTargetColor,
+	RGBA? ShapeColor,
+	RGBA? ShapeMarginColor,
+	RGBA? CssGridColor,
 
 	// rgb, hsl, hwb, hex
 	string? ColorFormat,
@@ -32,5 +32,5 @@ record HighlightConfig(
 	// aa, aaa, apca
 	string? ContrastAlgorithm,
 
-	ContainerQueryContainerHighlightConfig? containerQueryContainerHighlightConfig
+	ContainerQueryContainerHighlightConfig? ContainerQueryContainerHighlightConfig
 );

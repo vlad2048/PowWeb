@@ -1,6 +1,92 @@
 ﻿using PowBasics.Geom;
 using PowRxVar;
 using PowWeb._1_Init._4_Exec.Structs.Enums;
+using PowWeb._2_Actions._5_Click.Events;
+using PowWeb._2_Actions._5_Click.Logic;
+
+// ReSharper disable CheckNamespace
+namespace PowWeb;
+
+public class ClickOpt
+{
+	public CancellationToken CancelToken { get; set; } = CancellationToken.None;
+	public bool HighlightClick { get; set; } = true;
+	public bool RestoreScrollingPosAfter { get; set; }
+	public TimeSpan? TimeToWaitForDodgyTabsAfterClick { get; set; } = TimeSpan.FromMilliseconds(1000);
+	public TimeSpan? DOMContentLoadedTimeout { get; set; } = TimeSpan.FromMilliseconds(1000);
+
+	private ClickOpt()
+	{
+	}
+
+	internal static ClickOpt Build(Action<ClickOpt>? optFun)
+	{
+		var opt = new ClickOpt();
+		optFun?.Invoke(opt);
+		return opt;
+	}
+}
+
+public static class Click_Ext
+{
+	public static void Click(this WebInst www, N nod, Action<ClickOpt>? optFun = null) => www.Click(nod.V.Bounds, optFun);
+
+	public static void Click(this WebInst www, R nodR, Action<ClickOpt>? optFun = null)
+	{
+		if (nodR == R.Empty) return;
+		www.Click(nodR.Center, optFun);
+	}
+
+	public static void Click(this WebInst www, Pt clickPt, Action<ClickOpt>? optFun = null)
+	{
+		www.SigStart(CodeLoc.Click);
+
+		var opt = ClickOpt.Build(optFun);
+		var page = www.GetPage();
+		using var d = new Disp();
+		var (evtSig, evtObs) = ClickEvents.Make().D(d);
+
+		www.EnforceSingleTab(out var slimTab, evtObs, evtSig, opt.TimeToWaitForDodgyTabsAfterClick).D(d);
+		www.WaitDOMContentLoaded(out var slimDomLoaded, opt.DOMContentLoadedTimeout).D(d);
+
+		using (var _ = www.ScrollIntoViewAndRestore(clickPt, opt.RestoreScrollingPosAfter))
+		{
+			clickPt -= www.GetScroll();
+			if (opt.HighlightClick)
+				www.Blink(clickPt, bo =>
+				{
+					bo.CancelToken = opt.CancelToken;
+				});
+			page.Mouse.ClickAsync(clickPt.X, clickPt.Y).Wait();
+			evtSig.SignalClickDone();
+		}
+
+		slimTab.Wait(opt.TimeToWaitForDodgyTabsAfterClick ?? TimeSpan.Zero, opt.CancelToken);
+		slimDomLoaded.Wait(opt.DOMContentLoadedTimeout ?? TimeSpan.Zero, opt.CancelToken);
+
+
+		www.SigEnd();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+using PowBasics.Geom;
+using PowRxVar;
+using PowWeb._1_Init._4_Exec.Structs.Enums;
 using PowWeb._2_Actions._5_Click.Utils;
 using PuppeteerSharp;
 
@@ -45,10 +131,10 @@ public static class Click_Ext
 		var page = www.GetPage();
 		using var d = new Disp();
 
-		ISneakyTabChangeDetector detector = www.Opt.DisablePageTracking switch
+		ISneakyTabChangeDetector detector = www.Opt.DisallowMultipleTabs switch
 		{
-			false => new SneakyTabChangeDetector(page, www, opt.SneakyTabChangeDetectorTimeout).D(d),
-			true => new DummySneakyTabChangeDetector().D(d),
+			true => new SneakyTabChangeDetector(page, www, opt.SneakyTabChangeDetectorTimeout).D(d),
+			false => new DummySneakyTabChangeDetector().D(d),
 		};
 
 		var needScroll = ScrollIFN(page, ref clickPt);
@@ -62,7 +148,7 @@ public static class Click_Ext
 			page.DOMContentLoaded -= eventAwaiter.Listen;
 		}
 
-		if (!www.Opt.DisablePageTracking)
+		if (www.Opt.DisallowMultipleTabs)
 		{
 			detector.SigGotoDone();
 			var changeNfo = detector.WaitAndGetInfo();
@@ -120,3 +206,4 @@ public static class Click_Ext
 		}
 	}
 }
+*/

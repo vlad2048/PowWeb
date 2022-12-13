@@ -7,5 +7,6 @@ public enum CodeLoc
 	Cap,
 	Screenshot,
 	WhenRequest,
-	Click
+	Click,
+	Blink,
 }

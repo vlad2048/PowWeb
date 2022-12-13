@@ -58,7 +58,7 @@ static class GetPageUtils
 		var (pages, pageAdblockCnt) = browser.GetPagesAndAdCnt(null);
 		var time = (int)watch.Elapsed.TotalMilliseconds;
 
-		if (opt.DisablePageTracking)
+		if (!opt.DisallowMultipleTabs)
 		{
 			var visiblePage = pages.FirstOrDefault(e => e.IsVisible());
 			if (visiblePage == null)

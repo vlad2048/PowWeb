@@ -15,10 +15,10 @@ namespace PowWeb._2_Actions._2_Cap.Logic._3_DocMerging;
  */
 static class DocMerger
 {
-	public static Cap Merge(this Cap[] caps, string currentUrl, bool enable, string? logFolder)
+	public static Cap Merge(this Cap[] caps, string currentUrl, bool enable)
 		=> enable switch
 		{
-			true => Merge(caps, currentUrl, logFolder),
+			true => Merge(caps, currentUrl),
 			false => SelectSingleCap(caps, currentUrl)
 		};
 
@@ -43,7 +43,7 @@ static class DocMerger
 	// ****************************
 	// * Anchoring Caps Algorithm *
 	// ****************************
-	private static Cap Merge(Cap[] caps, string currentUrl, string? logFolder)
+	private static Cap Merge(Cap[] caps, string currentUrl)
 	{
 		var rootCap = SelectSingleCap(caps, currentUrl);
 		var ancs = (

@@ -1,4 +1,5 @@
-﻿using System.Reactive;
+﻿/*
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using PowRxVar;
@@ -100,7 +101,7 @@ class SneakyTabChangeDetector : ISneakyTabChangeDetector
 			logger.Log("no", Cols.No);
 		logger.Log($" extraTabsBefore:{nfo.ExtraTabCountBefore} extraTabsAfter:{nfo.ExtraPagesAfter.Length}", Cols.Default);
 		logger.Log(" needsBringToFront:", Cols.Default);
-		if (nfo.NeedsBringToFront)
+		if (nfo.NeedsBringToFront);
 			logger.Log("yes", Cols.Yes);
 		else
 			logger.Log("no", Cols.No);
@@ -111,6 +112,7 @@ class SneakyTabChangeDetector : ISneakyTabChangeDetector
 			logger.LogLine($"url next: '{nfo.Page.Url}'", Cols.Default);
 		}
 
-		return nfo;
+		return nfo
 	}
 }
+*/

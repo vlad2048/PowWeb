@@ -82,19 +82,19 @@ public class WebOpt : IInitLogging
 	public IPowWebLogger Logger { get; set; } = new ConLogger();
 
 	/// <summary>
-	/// false:
+	/// true:
 	///   - keep track of the current url
 	///   - GetPage() returns the page pointing to the current url
 	///   - consider other tabs as popups and close them
-	/// true:
+	/// false:
 	///   - does not keep track of the current url
 	///   - GetPage() returns the active tab
 	///   - does not automatically close other tabs
 	/// use true when you want to let the user play with the browser
 	/// <para/>
-	/// Default is false
+	/// Default is true
 	/// </summary>
-	public bool DisablePageTracking { get; set; }
+	public bool DisallowMultipleTabs { get; set; } = true;
 
 	internal static WebOpt Build(Action<WebOpt>? action)
 	{
