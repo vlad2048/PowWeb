@@ -24,7 +24,7 @@ public static class Goto_Ext
 
 		page.GoToAsync(url, WaitUntilNavigation.Networkidle2).Wait();
 		var areUrlsTheSame = UrlUtils.AreUrlsTheSame(page.Url, url);
-		if (!areUrlsTheSame) throw new FatalException($"Failed to goto url: '{url}'");
+		if (!areUrlsTheSame) throw new FatalException($"Failed to goto url: '{url}' (we ended up in '{page.Url}' instead)");
 
 		www.CurrentUrl = url;
 

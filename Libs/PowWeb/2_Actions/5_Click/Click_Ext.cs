@@ -41,29 +41,33 @@ public static class Click_Ext
 	{
 		www.SigStart(CodeLoc.Click);
 
-		var opt = ClickOpt.Build(optFun);
-		var page = www.GetPage();
-		using var d = new Disp();
-		var (evtSig, evtObs) = ClickEvents.Make().D(d);
-
-		www.EnforceSingleTab(out var slimTab, evtObs, evtSig, opt.TimeToWaitForDodgyTabsAfterClick).D(d);
-		www.WaitDOMContentLoaded(out var slimDomLoaded, opt.DOMContentLoadedTimeout).D(d);
-
-		using (var _ = www.ScrollIntoViewAndRestore(clickPt, opt.RestoreScrollingPosAfter))
+		try
 		{
-			clickPt -= www.GetScroll();
-			if (opt.HighlightClick)
-				www.Blink(clickPt, bo =>
-				{
-					bo.CancelToken = opt.CancelToken;
-				});
-			page.Mouse.ClickAsync(clickPt.X, clickPt.Y).Wait();
-			evtSig.SignalClickDone();
+			var opt = ClickOpt.Build(optFun);
+			var page = www.GetPage();
+			using var d = new Disp();
+			var (evtSig, evtObs) = ClickEvents.Make().D(d);
+
+			www.EnforceSingleTab(out var slimTab, evtObs, evtSig, opt.TimeToWaitForDodgyTabsAfterClick).D(d);
+			www.WaitDOMContentLoaded(out var slimDomLoaded, opt.DOMContentLoadedTimeout).D(d);
+
+			using (var _ = www.ScrollIntoViewAndRestore(clickPt, opt.RestoreScrollingPosAfter))
+			{
+				clickPt -= www.GetScroll();
+				if (opt.HighlightClick)
+					www.Blink(clickPt, bo => { bo.CancelToken = opt.CancelToken; });
+				page.Mouse.ClickAsync(clickPt.X, clickPt.Y).Wait();
+				evtSig.SignalClickDone();
+			}
+
+			slimTab.Wait(opt.TimeToWaitForDodgyTabsAfterClick ?? TimeSpan.Zero, opt.CancelToken);
+			slimDomLoaded.Wait(opt.DOMContentLoadedTimeout ?? TimeSpan.Zero, opt.CancelToken);
 		}
-
-		slimTab.Wait(opt.TimeToWaitForDodgyTabsAfterClick ?? TimeSpan.Zero, opt.CancelToken);
-		slimDomLoaded.Wait(opt.DOMContentLoadedTimeout ?? TimeSpan.Zero, opt.CancelToken);
-
+		catch (OperationCanceledException)
+		{
+			www.SigEnd();
+			throw;
+		}
 
 		www.SigEnd();
 	}
