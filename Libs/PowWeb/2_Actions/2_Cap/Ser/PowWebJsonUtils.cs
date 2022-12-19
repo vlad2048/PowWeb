@@ -28,7 +28,8 @@ public class PowWebJsonUtils
 	public static T Load<T>(string file)
 	{
 		var str = File.ReadAllText(file);
-		var obj = JsonSerializer.Deserialize<T>(str, JsonOpt);
-		return obj!;
+		return LoadFromString<T>(str);
 	}
+
+	public static T LoadFromString<T>(string str) => JsonSerializer.Deserialize<T>(str, JsonOpt)!;
 }
