@@ -71,7 +71,7 @@ public static class Blink_Ext
 		var startTime = DateTime.Now;
 		
 		Observable.Interval(opt.Freq)
-			.Subscribe(i =>
+			.Subscribe(i => WrapSafe(() =>
 			{
 				if (DateTime.Now - startTime >= opt.TotalTime)
 				{
@@ -92,13 +92,39 @@ public static class Blink_Ext
 						HideBoth();
 						break;
 				}
-			}).D(d);
+			})).D(d);
 		
 		slim.Wait(opt.CancelToken);
-		HideBoth();
+
+		WrapSafe(() =>
+		{
+			HideBoth();
+		});
 
 		//www.SigEnd();
 	}
+
+	private static void WrapSafe(Action action)
+	{
+		try
+		{
+			action();
+		}
+		catch (Exception ex)
+		{
+			// Protocol error (Overlay.highlightRect): Overlay must be enabled before a tool can be shown
+			if (IsEx<MessageException>(ex) && ex.HResult == -2146233088)
+				return;
+			throw;
+		}
+	}
+
+	private static bool IsEx<T>(Exception ex) => ex switch
+	{
+		T => true,
+		AggregateException e when e.InnerExceptions.Any(f => f is T) => true,
+		_ => false
+	};
 	
 	private static void ShowR(this CDPSession client, R r, RGBA colFill, RGBA colStroke) =>
 		client.Overlay_HighlightRect(r.X, r.Y, r.Width, r.Height, colFill, colStroke);
