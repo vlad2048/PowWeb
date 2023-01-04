@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DRuntime.Structs;
 
-record ExceptionDetails(
+public record ExceptionDetails(
 	int ExceptionId,
 	string Text,
 	int LineNumber,

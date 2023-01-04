@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DDebugger.Structs;
 
-record BreakLocation(
+public record BreakLocation(
 	string ScriptId,
 	int LineNumber,
 	int? ColumnNumber,

@@ -2,7 +2,7 @@
 
 namespace PowWeb.ChromeApi.DDebugger.Structs;
 
-record Scope(
+public record Scope(
 	string Type,
 	RemoteObject Object,
 	string Name,

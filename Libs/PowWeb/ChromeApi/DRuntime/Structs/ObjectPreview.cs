@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DRuntime.Structs;
 
-record ObjectPreview(
+public record ObjectPreview(
 	string Type,
 	string Subtype,
 	string Description,

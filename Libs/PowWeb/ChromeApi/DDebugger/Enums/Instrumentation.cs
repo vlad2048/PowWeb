@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DDebugger.Enums;
 
-enum Instrumentation
+public enum Instrumentation
 {
 	BeforeScriptExecution,
 	BeforeScriptWithSourceMapExecution

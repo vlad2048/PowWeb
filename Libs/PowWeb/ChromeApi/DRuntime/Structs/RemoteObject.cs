@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DRuntime.Structs;
 
-record RemoteObject(
+public record RemoteObject(
 	string Type,
 	string SubType,
 	string ClassName,

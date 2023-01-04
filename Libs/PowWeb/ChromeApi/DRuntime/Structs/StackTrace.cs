@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DRuntime.Structs;
 
-record StackTrace(
+public record StackTrace(
 	string? Description,
 	CallFrame[] CallFrames,
 	StackTrace? Parent,

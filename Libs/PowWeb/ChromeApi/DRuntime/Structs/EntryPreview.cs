@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DRuntime.Structs;
 
-record EntryPreview(
+public record EntryPreview(
 	ObjectPreview Key,
 	ObjectPreview Value
 );

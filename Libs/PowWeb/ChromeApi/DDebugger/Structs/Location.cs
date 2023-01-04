@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DDebugger.Structs;
 
-record Location(
+public record Location(
 	string ScriptId,
 	int LineNumber,
 	int? ColumnNumber

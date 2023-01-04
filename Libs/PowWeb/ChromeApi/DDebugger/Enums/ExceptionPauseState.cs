@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DDebugger.Enums;
 
-enum ExceptionPauseState
+public enum ExceptionPauseState
 {
 	None,
 	Uncaught,

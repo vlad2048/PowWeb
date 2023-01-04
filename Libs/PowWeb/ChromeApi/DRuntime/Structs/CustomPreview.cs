@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DRuntime.Structs;
 
-record CustomPreview(
+public record CustomPreview(
 	string Header,
 	string? RemoteObjectId
 );

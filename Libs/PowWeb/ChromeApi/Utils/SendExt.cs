@@ -15,7 +15,7 @@ static class SendExt
 	public static void Send(this CDPSession client, string cmd) => client.SendAsync(cmd).Wait();
 }
 
-static class WhenEventExt
+public static class WhenEventExt
 {
 	private static readonly Dictionary<CDPSession, IObservable<MessageEventArgs>> obsMap = new();
 	private static readonly Lazy<IScheduler> scheduler = new(() => new TaskPoolScheduler(new TaskFactory()));

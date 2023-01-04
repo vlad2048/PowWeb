@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DRuntime.Structs;
 
-record StackTraceId(
+public record StackTraceId(
 	string Id,
 	string UniqueDebuggerId
 );

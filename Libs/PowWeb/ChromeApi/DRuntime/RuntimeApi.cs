@@ -4,7 +4,7 @@ using PuppeteerSharp;
 
 namespace PowWeb.ChromeApi.DRuntime;
 
-static class RuntimeApi
+public static class RuntimeApi
 {
 	public record Runtime_Evaluate_Ret(RemoteObject Result, ExceptionDetails? ExceptionDetails);
 	public static Runtime_Evaluate_Ret Runtime_Evaluate(

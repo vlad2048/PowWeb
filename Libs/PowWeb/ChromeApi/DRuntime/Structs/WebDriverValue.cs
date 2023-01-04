@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DRuntime.Structs;
 
-record WebDriverValue(
+public record WebDriverValue(
 	string Type,
 	object? Value,
 	string? ObjectId

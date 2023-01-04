@@ -2,7 +2,7 @@
 
 namespace PowWeb.ChromeApi.DDebugger.Structs;
 
-record CallFrame(
+public record CallFrame(
 	string CallFrameId,
 	string FunctionName,
 	Location? FunctionLocation,

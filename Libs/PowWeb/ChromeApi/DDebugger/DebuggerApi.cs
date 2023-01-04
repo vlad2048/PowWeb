@@ -7,7 +7,7 @@ using PuppeteerSharp;
 
 namespace PowWeb.ChromeApi.DDebugger;
 
-static class DebuggerApi
+public static class DebuggerApi
 {
 	private record Debugger_Enable_Ret(string DebuggerId);
 	public static string Debugger_Enable(this CDPSession client) => client.Send<Debugger_Enable_Ret>("Debugger.enable").DebuggerId;
@@ -37,6 +37,9 @@ static class DebuggerApi
 
 	public record Debugger_GetScriptSource_Ret(string ScriptSource, string? Bytecode);
 	public static Debugger_GetScriptSource_Ret Debugger_GetScriptSource(this CDPSession client, string scriptId) => client.Send<Debugger_GetScriptSource_Ret>("Debugger.getScriptSource", new { ScriptId = scriptId });
+
+	public record Debugger_SetScriptSource_Ret(string Status, DRuntime.Structs.ExceptionDetails? ExceptionDetails);
+	public static Debugger_SetScriptSource_Ret Debugger_SetScriptSource(this CDPSession client, string scriptId, string scriptSource, bool? dryRun, bool? allowTopFrameEditing) => client.Send<Debugger_SetScriptSource_Ret>("Debugger.setScriptSource", new { ScriptId = scriptId, ScriptSource = scriptSource, DryRun = dryRun, AllowTopFrameEditing = allowTopFrameEditing });
 	
 	private record Debugger_SetInstrumentationBreakpoint_Ret(string BreakpointId);
 	public static string Debugger_SetInstrumentationBreakpoint(this CDPSession client, Instrumentation instrumentation) => client.Send<Debugger_SetInstrumentationBreakpoint_Ret>("Debugger.setInstrumentationBreakpoint", new { Instrumentation = $"{instrumentation}".CamelCase() }).BreakpointId;

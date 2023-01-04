@@ -1,6 +1,6 @@
 ﻿namespace PowWeb.ChromeApi.DDebugger.Structs;
 
-record DebugSymbols(
+public record DebugSymbols(
 	string Type,
 	string? ExternalUrl
 );

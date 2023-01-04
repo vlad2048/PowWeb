@@ -1,4 +1,7 @@
-﻿using PowWeb;
+﻿using PowBasics.Geom;
+using PowWeb;
+using PowWeb._1_Init._1_OptStructs.Enums;
+using PuppeteerSharp;
 
 namespace WebPlay;
 
@@ -8,37 +11,55 @@ static class Program
 	{
 		var web = Web.Get(opt =>
 		{
-		
+			opt.AdBlockMode = AdBlockMode.EnabledCloseTabOnStartup;
 		});
 	
-		var url_1 = "https://motherless.com/u/Myhumantoilet?t=v";
-		var url_2 = "https://motherless.com/C7EC50F";
-	
-		var globIdx = 0;
+		var url = "https://scatkings.com/categories/scat-women/";
 	
 		web.Exec(null, www =>
 		{
-			var idx = globIdx++;
-			Log($"[{idx}] start(url_1)");
-			www.Goto(url_1);
-			Log($"[{idx}] done(url_1)");
+			www.Goto(url);
+			www.SetViewport(new Sz(1200, 800));
+
+			var page = www.GetPage();
+
+			//var elt = page.QuerySelectorAsync("#list_videos_common_videos_list").Result;
+
+			var scriptElt = page.AddScriptTagAsync(new AddTagOptions
+			{
+				Content = """
+					function chk(pageIdx) {
+						const elt = document.querySelector('#list_videos_common_videos_list>div>h1');
+						if (!elt) return false;
+						const txt = elt.innerText;
+						const parts = txt.split(' ');
+						if (parts.length < 2) return false;
+						if (parts[parts.length - 2] !== 'Page') return false;
+						const page = +parts[parts.length - 1];
+						console.log(`P=${page}  (pageIdx=${pageIdx})`);
+						return page === pageIdx;
+					}
+					""",
+			}).Result;
+
+			L("click_before");
+			page.ClickAsync(".next").Wait();
+			L("click_after");
+
+			var waitOpt = new WaitForFunctionOptions
+			{
+				Polling = WaitForFunctionPollingOption.Mutation,
+				Timeout = 1000
+			};
+			const int pageIdx = 3;
+			var handle = page.WaitForFunctionAsync("chk", waitOpt, pageIdx).Result;
+
+			L("after_wait");
 		});	
-		Log("url_1 finished");
 
-		Log("Press a key ...");
-		Console.ReadKey();
-
-		web.Exec(null, www =>
-		{
-			var idx = globIdx++;
-			Log($"[{idx}] start(url_2)");
-			www.Goto(url_2);
-			Log($"[{idx}] done(url_2)");
-		});
-		Log("url_2 finished");
 	}
 
-	private static void Log(string str) => Console.WriteLine(str);
+	private static void L(string str) => Console.WriteLine(str);
 }
 
 
