@@ -25,7 +25,7 @@
 		<PackageReference Include="PowBasics.Geom" Version="0.0.9" />
 		<PackageReference Include="PowMaybe" Version="0.0.9" />
 		<PackageReference Include="PowMaybeErr" Version="0.0.9" />
-		<PackageReference Include="PowRxVar.WinForms" Version="0.0.15" />
+		<PackageReference Include="PowRxVar.WinForms" Version="0.0.16" />
 		<PackageReference Include="PowTrees" Version="0.0.13" />
 		<PackageReference Include="PuppeteerSharp" Version="7.1.0" />
 		<PackageReference Include="RestSharp" Version="108.0.1" />
