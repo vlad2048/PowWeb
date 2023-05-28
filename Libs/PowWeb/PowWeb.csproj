@@ -23,10 +23,10 @@
 		<PackageReference Include="IpcLib" Version="0.0.1" />
 		<PackageReference Include="Jsbeautifier" Version="0.0.1" />
 		<PackageReference Include="PowBasics.Geom" Version="0.0.9" />
-		<PackageReference Include="PowMaybe" Version="0.0.6" />
-		<PackageReference Include="PowMaybeErr" Version="0.0.6" />
+		<PackageReference Include="PowMaybe" Version="0.0.8" />
+		<PackageReference Include="PowMaybeErr" Version="0.0.8" />
 		<PackageReference Include="PowRxVar.WinForms" Version="0.0.15" />
-		<PackageReference Include="PowTrees" Version="0.0.10" />
+		<PackageReference Include="PowTrees" Version="0.0.13" />
 		<PackageReference Include="PuppeteerSharp" Version="7.1.0" />
 		<PackageReference Include="RestSharp" Version="108.0.1" />
 		<PackageReference Include="System.Management" Version="6.0.0" />
